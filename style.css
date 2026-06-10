@@ -1,0 +1,512 @@
+/* --- Correctif Global Anti-Débordement --- */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html, body {
+    max-width: 100vw;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+/* Couleurs du projet */
+:root {
+    --primary: #2c3e50;
+    --accent: #e67e22;
+    --light: #ecf0f1;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--light);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+    background: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--primary);
+    font-weight: 500;
+}
+
+.btn-reg {
+    background: var(--accent);
+    color: white !important;
+    padding: 8px 15px;
+    border-radius: 5px;
+}
+
+/* Style pour centrer l'image et le texte */
+.hero-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center;
+    padding: 40px 5%;
+    background-color: #fff;
+    text-align: center;
+}
+
+.hero-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 15px; 
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15); 
+    margin-bottom: 25px;
+}
+
+.hero-text h1 {
+    color: var(--primary);
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+}
+
+.hero-text p {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+.stats {
+    margin-top: 20px;
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+}
+
+.stats span {
+    background: var(--light);
+    padding: 10px 20px;
+    border-radius: 50px;
+    color: var(--primary);
+}
+
+.about-container {
+    max-width: 900px;   
+    padding: 0 20px;
+    text-align: center;   
+}
+
+.about-container h2 {
+    color: var(--primary);
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+    position: relative;
+    display: inline-block;
+}
+
+.about-container h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: var(--accent); 
+    margin: 10px auto 0;
+    border-radius: 2px;
+}
+
+.about-container p {
+    font-size: 1.2rem;
+    line-height: 1.9;     
+    color: #444;        
+    text-align: justify;  
+    text-justify: inter-word;
+}
+
+[dir="rtl"] .about-container p {
+    font-family: 'Amiri', serif;
+    text-align: justify;
+    font-size: 1.3rem;      
+}
+
+.main-footer {
+    background-color: var(--primary);
+    color: white;
+    padding: 40px 0 20px 0;
+    margin-top: 50px;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 5%;
+    gap: 30px;
+}
+
+.footer-info h3 {
+    color: var(--accent);
+    margin-bottom: 20px;
+}
+
+.footer-info p {
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.footer-map h4 {
+    margin-bottom: 15px;
+}
+
+.map-responsive {
+    overflow: hidden;
+    padding-bottom: 50%;
+    position: relative;
+    height: 0;
+    border-radius: 10px;
+}
+
+.map-responsive iframe {
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 30px;
+    margin-top: 30px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    font-size: 0.9rem;
+    color: #bdc3c7;
+}
+
+/* login page */
+.auth-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+    padding: 40px 20px;
+}
+
+.login-card {
+    background: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+.login-card h2 {
+    color: #2c3e50; 
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.form-group input, .form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-sizing: border-box; 
+    font-family: inherit;
+}
+
+.btn-auth {
+    width: 100%;
+    padding: 14px;
+    background-color: #e67e22; 
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-auth:hover {
+    background-color: #d35400;
+}
+
+/*registration page*/
+.register-card {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 600px; 
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 15px;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+/* =========================================
+   تنسيقات صفحة المكتبة (Bibliotheque)
+   ========================================= */
+
+.lib-hero {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: var(--primary);
+    color: white;
+    margin-bottom: 30px;
+}
+
+.lib-hero h1 {
+    margin: 0 0 10px 0;
+    font-size: 2.5rem;
+}
+
+.lib-hero p {
+    margin: 0;
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+.filter-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 40px;
+    padding: 0 20px;
+}
+
+.btn-filter {
+    padding: 10px 20px;
+    background-color: white;
+    color: var(--primary);
+    text-decoration: none;
+    border: 2px solid var(--primary);
+    border-radius: 25px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.btn-filter:hover, .btn-filter.active {
+    background-color: var(--accent);
+    color: white;
+    border-color: var(--accent);
+}
+
+.library-grid-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px 60px 20px;
+}
+
+.books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.book-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-top: 4px solid var(--accent);
+}
+
+.book-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.book-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: var(--primary);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+[dir="rtl"] .book-badge {
+    right: auto;
+    left: 15px;
+}
+
+.book-info {
+    padding: 30px 20px 20px 20px;
+    flex-grow: 1;
+}
+
+.book-info h3 {
+    margin: 0 0 15px 0;
+    color: var(--primary);
+    font-size: 1.3rem;
+    line-height: 1.4;
+}
+
+.book-info p {
+    margin: 8px 0;
+    color: #555;
+    font-size: 0.95rem;
+}
+
+.book-info strong {
+    color: #333;
+}
+
+.book-footer {
+    background-color: #f8f9fa;
+    padding: 15px 20px;
+    border-top: 1px solid #eee;
+    text-align: center;
+    font-size: 0.95rem;
+}
+
+.book-footer strong {
+    color: var(--accent);
+    font-size: 1.2rem;
+    margin: 0 5px;
+}
+
+.no-results {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #777;
+    padding: 40px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+/* =========================================
+   تنسيقات صفحة النشاطات (Activities) - الشكل النهائي
+   ========================================= */
+.events-page {
+    background-color: #f4f6f9;
+}
+
+.page-intro {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.page-intro h1 { 
+    margin: 0 0 10px 0; 
+    font-size: 2.2rem; 
+    color: var(--primary);
+}
+
+.page-intro p { 
+    margin: 0; 
+    font-size: 1.1rem; 
+    color: #666; 
+}
+
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 20px 60px 20px;
+}
+
+.event-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease;
+    border: none; /* إزالة الحدود القديمة لتبدو مثل تصميمك */
+}
+
+.event-card:hover { 
+    transform: translateY(-5px); 
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12); 
+}
+
+.event-month {
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-align: center;
+    padding: 15px;
+}
+
+/* --- تنسيق النشاطات القادمة (الخضراء والبرتقالية) --- */
+.upcoming-event .event-month {
+    background-color: #2ecc71; /* رأسية خضراء */
+    color: white;
+}
+
+.upcoming-event h3 { 
+    color: #e67e22; /* اسم الحدث برتقالي */
+    margin: 0 0 12px 0; 
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+/* --- تنسيق النشاطات المنتهية (الرمادية الباهتة) --- */
+.past-event {
+    opacity: 0.8; /* جعلها باهتة قليلاً لتدل على انقضائها */
+}
+
+.past-event .event-month {
+    background-color: #bdc3c7; /* رأسية رمادية */
+    color: white;
+}
+
+.past-event h3 { 
+    color: #7f8c8d; /* اسم الحدث رمادي داكن */
+    margin: 0 0 12px 0; 
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.event-body { 
+    padding: 25px 20px; 
+    text-align: center;
+    flex-grow: 1;
+}
+
+.event-body p { 
+    color: #666; 
+    line-height: 1.6; 
+    margin: 0; 
+    font-size: 0.95rem;
+}
